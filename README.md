@@ -11,7 +11,7 @@
    ```
 4. Initialize and update the submodule:
    ```bash
-   npm install && npm run build
+   cd ecommerce/frontend; npm install ; npm run build ; npm start
    ```
 5. Open following link in your browser to use the application. "http://localhost:3000"
 

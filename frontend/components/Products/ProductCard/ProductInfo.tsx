@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { Product } from '../../types/types';
+import { Product } from '../../../types/types';
 
 const ProductInfo: React.FC<{ product: Product }> = ({ product }) => {
   return (

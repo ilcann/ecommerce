@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { Product } from '../../types/types';
+import { Product } from '../../../types/types';
 
 const ProductPrice: React.FC<{ product: Product }> = ({ product }) => {
   const hasDiscount = product.discount > 0;

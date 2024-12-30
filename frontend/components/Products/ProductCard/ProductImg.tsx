@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardMedia } from '@mui/material';
-import { Product } from '../../types/types';
+import { Product } from '../../../types/types';
 
 const ProductImg: React.FC<{ product: Product }> = ({ product }) => {
   return (
