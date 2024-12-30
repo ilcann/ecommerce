@@ -7,7 +7,7 @@
    ```
 3. Navigate to the cloned directory:
    ```bash
-   cd c--ECommerce/frontend
+   cd ecommerce/frontend
    ```
 4. Initialize and update the submodule:
    ```bash
