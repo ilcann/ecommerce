@@ -3,7 +3,7 @@
 1. Open a terminal or command prompt.
 2. Clone the repository:
    ```bash
-   git clone https://github.com/ilcann/c--ECommerce.git
+   git clone https://github.com/ilcann/ecommerce.git
    ```
 3. Navigate to the cloned directory:
    ```bash
