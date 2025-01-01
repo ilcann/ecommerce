@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import '../styles/globals.css';
-import { ProductProvider, CategoryProvider, UIProvider, CartProvider} from '../context';
+import "@/styles/globals.css"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,20 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-      </head>
-      <body>
-        <CartProvider>
-          <CategoryProvider>
-            <ProductProvider>
-              <UIProvider>
-                {children}
-              </UIProvider>
-            </ProductProvider>
-          </CategoryProvider>
-        </CartProvider>
-
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

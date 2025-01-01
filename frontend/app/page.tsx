@@ -1,18 +1,12 @@
-'use client'
 
-import { Grid2 as Grid, Box} from '@mui/material';
-import {Products, Header, Cart} from '../components/';
-import { useUI } from '../context/UIContext';
-
-export default function Home() {
-  const { showCart } = useUI();
+import { Products, Cart } from "@/components";
+import { Box } from "@mui/material";
+export default  function Home() {
+  const showCart = true;
 
   return (
-    <Grid container>
-      <Header/>
-      <Box maxWidth={'xl'} margin = {'0 auto'} pt={4} pb={4}>
-        {showCart ? <Cart/> : <Products/>}
+      <Box maxWidth={'lg'} m={'0 auto'} p={2}>
+        { showCart ? (<Cart/>) : (<Products/>)}
       </Box>
-    </Grid>
   );
 }

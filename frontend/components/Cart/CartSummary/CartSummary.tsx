@@ -1,12 +1,10 @@
-import React from 'react';
-import { Cart } from '../../types/types';
-import { Box, Grid2 as Grid, Typography, Divider} from '@mui/material';
-
-const CartSummary : React.FC<{cart: Cart}> = ({ cart }) => {
+import { ICart } from "@/types";
+import { Box, Grid2 as Grid, Divider, Typography } from "@mui/material";
+export default function CartSummary({ cart }: { cart: ICart }) {
+    // TODO: cart prop olarak alınabilir
     const totalPrice = cart.items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-    const finalPrice = cart.items.reduce((sum, item) => sum + item.product.discountedPrice * item.quantity, 0);
-    const totalDiscount = totalPrice - finalPrice;
-
+    const totalDiscount = cart.items.reduce((sum, item) => sum + (item.product.discountPercentage/100) * item.product.price * item.quantity, 0);
+    const finalPrice = totalPrice - totalDiscount;
     return (
         <Grid 
             container 
@@ -50,6 +48,4 @@ const CartSummary : React.FC<{cart: Cart}> = ({ cart }) => {
             </Grid>
         </Grid>
     );
-}
-
-export default CartSummary;
+};
