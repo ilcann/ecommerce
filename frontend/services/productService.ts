@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProduct } from '../types';
+import { IProduct } from '@/types';
 
 const targetUrl = "https://ecomcartservice-gqhxgngjdkedghd3.germanywestcentral-01.azurewebsites.net/api/product";
 
@@ -7,7 +7,7 @@ export const fetchProducts = async (): Promise<IProduct[]> => {
   try {
     console.log("fetching")
     const response = await axios.get(targetUrl);
-    const products: IProduct[] = response.data.map((product: any) => ({
+    const products: IProduct[] = response.data.map((product) => ({
         id: product.id,
         brand: product.brand,
         name: product.title,
@@ -20,7 +20,7 @@ export const fetchProducts = async (): Promise<IProduct[]> => {
         thumbnail: product.thumbnail,
     }))
     return products;
-  } catch (error: any) {
+  } catch (error) {
     return [];
   }
 };

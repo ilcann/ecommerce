@@ -1,53 +1,52 @@
 import axios from 'axios';
-
 import { ICart, ICartUpdate } from '@/types';
-import { json } from 'stream/consumers';
-
 const serverURL = "https://ecomcartservice-gqhxgngjdkedghd3.germanywestcentral-01.azurewebsites.net"
 
-// fetchCart
 const fetchCartById = async (id: number): Promise<ICart> => {
     const reqURL = `/api/cart/summary/${id}`
 
     try {
         const response = await axios.get<ICart>(serverURL + reqURL);
-        return ({
+        const cart = {
             id: id,
-            items: response.data.items.map((item) => ({
+            items: response.data.items.map((item) => {
+              return {
+                cartId: id,
                 product: item.product,
-                quantity: item.quantity,
-            }))
-        })
+                quantity: item.quantity
+              };
+            })
+        };
+        return (cart);
+
     } catch (error) {
         console.error('Error fetching cart:', error);
         return { 
-            id,
+            id: 0,
             items: [],
         }; // Hata durumunda boş bir yanıt döner
     }
 };
 
-
-
 // updateCart
 const updateCart = async (cartUpdate: ICartUpdate): Promise<void> => {
     const reqURL = '/api/cart/update';
-    
     const req = {
-        username: String(cartUpdate.cart.id),
-        productId: Number(cartUpdate.product.id),
-        quantity: Number(cartUpdate.quantity),
+        username: String(cartUpdate.cartItem.cartId),
+        productId: Number(cartUpdate.cartItem.product.id),
+        quantity: Number(cartUpdate.newQuantity),
     };
-    console.log(req);
+    console.log(cartUpdate);
     const jsonStr = JSON.stringify(req);
     console.log(jsonStr);
-
     try {
+        console.log("olcak mı");
         const response = await fetch(serverURL + reqURL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            mode: 'no-cors',
             body: jsonStr,
         })
 
@@ -61,4 +60,4 @@ const updateCart = async (cartUpdate: ICartUpdate): Promise<void> => {
     }
 };
 
-export { fetchCartById, updateCart };
+export {fetchCartById, updateCart};

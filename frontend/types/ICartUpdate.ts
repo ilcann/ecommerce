@@ -1,8 +1,6 @@
-import { ICart } from "./ICart";
-import { IProduct } from "./IProduct";
+import { ICartItem } from "./ICartItem";
 
 export interface ICartUpdate {
-    cart: ICart;
-    product: IProduct;
-    quantity: number;
+    cartItem: ICartItem;
+    newQuantity: number;
 }
