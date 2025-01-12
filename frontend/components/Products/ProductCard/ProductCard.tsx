@@ -36,14 +36,16 @@ const ProductCard: React.FC<{ product: IProduct }> = ({ product }) => {
             </CardContent>
             <ProductCardPrice product={product}/>
             <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 sx={{
                     width: '100%',
+                    color: 'black',
+                    borderColor: 'black',
+                    fontWeight: 'bold',
+                    '&:hover': {
                     backgroundColor: 'black',
                     color: 'white',
-                    '&:hover': {
-                    backgroundColor: '#333',
                     },
                 }}
             >
