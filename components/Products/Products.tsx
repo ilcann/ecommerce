@@ -1,8 +1,11 @@
+'use client'
+
 import { Container, Grid2 as Grid } from "@mui/material";
 import { ProductCard } from "@/components/Products"
-import { IProduct } from "@/types";
+import { useProducts } from "@/context";
 
-const Products = ({ products }: { products: IProduct[] }) => {
+const Products = () => {
+    const { products } = useProducts();
 
     return (      
     <Container disableGutters>

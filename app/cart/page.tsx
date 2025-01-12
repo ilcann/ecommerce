@@ -1,7 +1,12 @@
+'use client'
+
 import { Container, Grid2 as Grid } from "@mui/material";
 import { CartItems, CartSummary } from "@/components/Cart";
+import { useUI } from "@/context";
 
 const Cart = () => {
+    const { setShowCart } = useUI();
+    setShowCart(true);
     return (
         <Container disableGutters>
             <Grid container p={2} spacing={2}>

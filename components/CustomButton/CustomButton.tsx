@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from '@mui/material';
+import React from 'react';
+import { Button, ButtonProps, Typography } from '@mui/material';
 
 interface CustomButtonProps extends ButtonProps {
   variant?: 'contained' | 'outlined';
@@ -29,4 +30,29 @@ const CustomButton: React.FC<CustomButtonProps> = ({ variant = 'contained', text
   );
 };
 
-export default CustomButton;
+interface MenuButtonProps {
+  showCart: boolean;
+  onClick?: () => void; // onClick prop'u opsiyonel
+  text: string;
+}
+
+const MenuButton: React.FC<MenuButtonProps> = ({ showCart, onClick, text }) => {
+  return (
+    <Button
+      onClick={onClick}
+      sx={{
+        color: showCart ? 'lightgray' : 'black', // showCart true ise gri, false ise siyah
+        '&:hover': {
+          color: 'black', // Hover durumda yazı rengi siyah olacak
+        },
+        textTransform: 'none', // Yazının büyük harfe dönüşmemesini sağlıyor
+        height:'100%',
+        p:3,
+      }}
+    >
+      <Typography variant={'body1'} fontWeight={'bold'}>{text}</Typography>
+    </Button>
+  );
+};
+
+export {MenuButton, CustomButton};

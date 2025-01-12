@@ -1,13 +1,16 @@
+'use client'
+
 import { Grid2 as Grid } from "@mui/material"
 import { CartItemCard } from "./CartItemCard"
-import { ICart } from "@/types";
+import { useCart } from "@/context/CartContext";
 
-const CartItems = ({ cart }: { cart: ICart }) => {
-    const { items } = cart;
+const CartItems = () => {
+    const {cart} = useCart();
+    console.log(cart);
 
     return (
         <Grid container sx={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'}}>
-            {items.map((item) => (
+            {cart.items.map((item) => (
                 <Grid size={12} key={item.product.id}>
                     <CartItemCard item={item}/>
                 </Grid>

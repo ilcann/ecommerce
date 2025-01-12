@@ -1,11 +1,17 @@
-import { ICart, IUser, RCart } from "@/types";
+import { ICart, IUser, RCart, RCartUpdate } from "@/types";
 import axios from 'axios';
 import endpoints from "./endpoints";
 import { convertRCartToICart } from "./typeConverter";
 
 export const fetchCart = async (user: IUser): Promise<ICart> => {
     // Boş bir sepet nesnesi tanımlıyoruz
-    const emptyCart: ICart = { id: 0, items: [] };
+    const emptyCart: ICart = { 
+        id: 0, 
+        items: [],
+        totalPrice: 0,
+        totalDiscount: 0,
+        total: 0, 
+    };
 
     // Kullanıcı kontrolü yapıyoruz
     if (!user) {
@@ -30,4 +36,12 @@ export const fetchCart = async (user: IUser): Promise<ICart> => {
     }
 };
 
-//TODO: UpdateCart methodu yapılacak    
+// updateCart
+export const updateCart = async (cartUpdate: RCartUpdate): Promise<void> => {
+    try {
+        await axios.post(endpoints.cart.updateCart , cartUpdate);
+        console.log('Cart updated successfully');
+    } catch (error) {
+        console.error('Error updating cart:', error);
+    }
+};
