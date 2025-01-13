@@ -1,14 +1,12 @@
 'use client'
-import { useUI } from "@/context";
 import { ShoppingCartOutlined } from "@mui/icons-material";
-import { Box, Button, Container, Grid2 as Grid, IconButton, Typography} from "@mui/material"
+import { Box, Container, IconButton, Typography} from "@mui/material"
 import { MenuButton } from "../CustomButton/CustomButton";
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 
 
 const Header = () => {
-    const { showCart, toggleShowCart, setShowCart} = useUI();
     const pathname = usePathname();
     const isCartPage = pathname==='/cart';
 
@@ -19,14 +17,14 @@ const Header = () => {
                     {/* Left section: ECommerce link */}
                     <Box display={'flex'} flexDirection={'row'}>
                         {/* Left section: ECommerce link */}
-                        <Link href={'/'} onClick={isCartPage ? () => setShowCart(false) : () => {}} >
+                        <Link href={'/'}>
                             <Box display={'flex'} justifyContent={'flex-start'} alignItems={'center'} height={'100%'}>
                                 <Typography variant="h4" fontWeight="bold">ECommerce</Typography>
                             </Box>
                         </Link>
                         {/* Center section: Products link */}
                         <Link href="/">
-                            <MenuButton text="Ürünler" showCart={showCart} onClick={isCartPage? setShowCart(false) : () => {}} height="100%" />
+                            <MenuButton text="Ürünler" isCartPage={isCartPage} height="100%" />
                         </Link>
                     </Box>
 
@@ -34,8 +32,7 @@ const Header = () => {
                     <Box p={2}>
                         <Link href={isCartPage ? '/' : '/cart'} passHref>
                             <IconButton 
-                             size="medium" 
-                             onClick={toggleShowCart}
+                             size="medium"
                              sx={{ color: isCartPage ? 'black' : 'lightgray' }}>
                                 <ShoppingCartOutlined fontSize="medium" />
                             </IconButton>

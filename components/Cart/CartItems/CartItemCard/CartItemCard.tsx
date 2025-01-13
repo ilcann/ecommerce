@@ -2,7 +2,12 @@ import { Card, CardMedia, Grid2 as Grid, Typography } from "@mui/material";
 import { ICartItem } from "@/types";
 import { CartItemCardPrice, CartItemCardQuantity } from ".";
 
-const CartItemCard: React.FC<{ item:ICartItem}> = ({ item }) => {
+interface CartItemsProps {
+    item:ICartItem
+    onQuantityChange: (cartItem: ICartItem, action: 'increase' | 'decrease') => void;
+}
+
+const CartItemCard = ({ item, onQuantityChange }: CartItemsProps) => {
     return (
         <Card key={item.product.id} sx={{ boxShadow: 'none', borderRadius: 0 }}>
             <Grid container sx={{alignItems:'center'}}>
@@ -15,7 +20,7 @@ const CartItemCard: React.FC<{ item:ICartItem}> = ({ item }) => {
                 </Grid>
                 <Grid size={{xs: 12, sm:12, md:5}} p={2}>
                     <Grid container direction={'row'} alignItems={'center'} justifyContent={'space-between'} spacing={{md:1}}>
-                        <CartItemCardQuantity cartItem={item}/>
+                        <CartItemCardQuantity cartItem={item} onQuantityChange={onQuantityChange}/>
                         <CartItemCardPrice cartItem={item}/>
                     </Grid>
                 </Grid>

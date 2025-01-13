@@ -1,23 +1,13 @@
-'use client'
+import { ICart, IUser } from "@/types";
+import { CartC } from "@/components";
+import { fetchCart } from "@/services/cartService";
 
-import { Container, Grid2 as Grid } from "@mui/material";
-import { CartItems, CartSummary } from "@/components/Cart";
-import { useUI } from "@/context";
+const Cart = async () => {
+    const user: IUser = { username: "123" }; // mock user
+    const initialCart: ICart = await fetchCart(user); // fetch cart data from an API or database
 
-const Cart = () => {
-    const { setShowCart } = useUI();
-    setShowCart(true);
     return (
-        <Container disableGutters>
-            <Grid container p={2} spacing={2}>
-                <Grid size={{xs:12, sm:12, md:8}}>
-                    <CartItems/>
-                </Grid>
-                <Grid size={{xs:12, sm:12, md:4}}>
-                    <CartSummary/>
-                </Grid>
-            </Grid>
-        </Container>
+        <CartC initialCart={initialCart}/>
     )
 }
 

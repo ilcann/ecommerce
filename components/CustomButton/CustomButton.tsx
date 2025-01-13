@@ -31,17 +31,17 @@ const CustomButton: React.FC<CustomButtonProps> = ({ variant = 'contained', text
 };
 
 interface MenuButtonProps {
-  showCart: boolean;
+  isCartPage: boolean;
   onClick?: () => void; // onClick prop'u opsiyonel
   text: string;
 }
 
-const MenuButton: React.FC<MenuButtonProps> = ({ showCart, onClick, text }) => {
+const MenuButton: React.FC<MenuButtonProps> = ({ isCartPage, onClick, text }) => {
   return (
     <Button
       onClick={onClick}
       sx={{
-        color: showCart ? 'lightgray' : 'black', // showCart true ise gri, false ise siyah
+        color: isCartPage ? 'lightgray' : 'black', // showCart true ise gri, false ise siyah
         '&:hover': {
           color: 'black', // Hover durumda yazı rengi siyah olacak
         },

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { IUser,ICart,IProduct} from "@/types";
-import { fetchCart } from "@/services/cartService";
+import { IProduct} from "@/types";
 import { fetchProducts } from "@/services/productService";
-import { CartProvider, UIProvider, ProductsProvider } from "@/context";
+import { ProductsProvider } from "@/context";
 import { Header } from "@/components";
 
 export const metadata: Metadata = {
@@ -16,25 +15,18 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user:IUser = {username: "123"}; // mock user
-  const cart:ICart = await fetchCart(user); // mock cart
   const products:IProduct[] = await fetchProducts();
-
   return (
     <html lang="en">
       <body>
-        <UIProvider>
           <header>
             <Header/>
           </header>
           <main>
-            <CartProvider initialCart={cart}>
             <ProductsProvider products={products}>
               {children}
             </ProductsProvider>
-            </CartProvider>
           </main>
-        </UIProvider>
       </body>
     </html>
   );
