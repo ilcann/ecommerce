@@ -9,7 +9,7 @@ import { mockUser as user } from "../config/mockUser";
 export const fetchCart = async (): Promise<ICart> => {
     // Boş bir sepet nesnesi tanımlıyoruz
     const emptyCart: ICart = { 
-        id: 0, 
+        id: Number(user.username),
         items: [],
     };
 

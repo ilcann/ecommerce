@@ -24,5 +24,6 @@ export async function incrementProductQuantity(productId:number) {
         }
         await updateCart(res);
     }
-    revalidatePath('../app/cart/page.tsx')
+    
+    revalidatePath('/cart');
 }

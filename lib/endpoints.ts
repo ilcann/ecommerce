@@ -1,7 +1,7 @@
 import { IUser } from "@/types";
 
 const localUrl = "http://localhost:5062"
-//const remoteURL = 'https://ecomcartservice-gqhxgngjdkedghd3.germanywestcentral-01.azurewebsites.net'
+// const remoteURL = 'https://ecomcartservice-gqhxgngjdkedghd3.germanywestcentral-01.azurewebsites.net'
 
 // Base URL
 const baseURL = localUrl;
