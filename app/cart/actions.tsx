@@ -1,23 +1,51 @@
-'use server'
+'use server';
 
-import { updateCart } from "@/services/cartService";
-import { ICartItem, RCartUpdate } from "@/types";
+import { fetchCart, updateCart } from "@/lib/db/cartService";
+import { RCartUpdate } from "@/types";
+import { revalidatePath } from "next/cache";
 
-
-export const increaseQuantity = async (cartItem: ICartItem) => {
-    const res:RCartUpdate = {
-        username: String(cartItem.cartId),
-        productId: cartItem.product.id,
-        quantity: cartItem.quantity + 1,
+export async function increaseQuantity(productId:number) {
+    const cart = await fetchCart();
+    
+    const articleInCart = cart.items.find(item => item.productId === productId);
+    
+    if (articleInCart) {
+        const res:RCartUpdate = {
+            username: String(articleInCart.cartId),
+            productId: articleInCart.productId,
+            quantity: articleInCart.quantity + 1,
+        }
+        await updateCart(res);
+    } else {
+        const res:RCartUpdate = {
+            username: String(cart.id),
+            productId: productId,
+            quantity: 1,
+        }
+        await updateCart(res);
     }
-    updateCart(res);
-};
+    revalidatePath("/app/cart/page.tsx")
+}
 
-export const decreaseQuantity = async (cartItem: ICartItem) => {
-    const res:RCartUpdate = {
-        username: String(cartItem.cartId),
-        productId: cartItem.product.id,
-        quantity: cartItem.quantity - 1,
+export async function descreaseQuantity(productId:number) {
+    const cart = await fetchCart();
+    
+    const articleInCart = cart.items.find(item => item.productId === productId);
+    
+    if (articleInCart && articleInCart.quantity > 0) {
+        const res:RCartUpdate = {
+            username: String(articleInCart.cartId),
+            productId: articleInCart.productId,
+            quantity: articleInCart.quantity - 1,
+        }
+        await updateCart(res);
+    } else {
+        const res:RCartUpdate = {
+            username: String(cart.id),
+            productId: productId,
+            quantity: 0,
+        }
+        await updateCart(res);
     }
-    updateCart(res);
-};
+    revalidatePath("/app/cart/page.tsx")
+}

@@ -1,7 +1,7 @@
 import { IProduct, RProduct } from "@/types";
 import axios from 'axios';
-import endpoints from "./endpoints";
-import { convertRProductToIProduct } from "./typeConverter";
+import endpoints from "../endpoints";
+import { convertRProductToIProduct } from "../typeConvert";
 
 export const fetchProducts = async (): Promise<IProduct[]> => {
     // Boş bir ürün listesi tanımlıyoruz

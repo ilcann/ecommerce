@@ -1,18 +1,16 @@
 'use server'
 
-import { ICart, IUser, RCart, RCartUpdate } from "@/types";
+import { ICart, RCart, RCartUpdate } from "@/types";
 import axios from 'axios';
-import endpoints from "./endpoints";
-import { convertRCartToICart } from "./typeConverter";
+import endpoints from "../endpoints";
+import { convertRCartToICart } from "../typeConvert";
+import { mockUser as user } from "../config/mockUser";
 
-export const fetchCart = async (user: IUser): Promise<ICart> => {
+export const fetchCart = async (): Promise<ICart> => {
     // Boş bir sepet nesnesi tanımlıyoruz
     const emptyCart: ICart = { 
         id: 0, 
         items: [],
-        totalPrice: 0,
-        totalDiscount: 0,
-        total: 0, 
     };
 
     // Kullanıcı kontrolü yapıyoruz
@@ -41,7 +39,7 @@ export const fetchCart = async (user: IUser): Promise<ICart> => {
 // updateCart
 export const updateCart = async (cartUpdate: RCartUpdate): Promise<void> => {
     try {
-        await axios.post('https://ecomcartservice-gqhxgngjdkedghd3.germanywestcentral-01.azurewebsites.net/api/cart/update' , cartUpdate);
+        await axios.post(endpoints.cart.updateCart , cartUpdate);
         console.log('Cart updated successfully');
     } catch (error) {
         console.error('Error updating cart:', error);

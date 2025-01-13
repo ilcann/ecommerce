@@ -1,19 +1,15 @@
 'use client'
-
-import { Box, Divider, Grid2 as Grid, Typography } from "@mui/material";
-import { CustomButton } from "@/components";
-import { formatPrice,currency } from "@/utils/price";
-import { calculateCart } from "@/services/typeConverter";
-import { ICart } from "@/types";
+import { Box, Button, Divider, Grid2 as Grid, Typography } from "@mui/material"
+import { formatPrice } from "@/lib/format"
 
 interface CartSummaryProps {
-    cart: ICart;
+    subTotal: number,
+    totalDiscount: number,
+    total: number,
 }
-  
-const CartSummary = ({ cart }: CartSummaryProps) => {
-    const {total, totalDiscount, totalPrice} = calculateCart(cart.items);
 
-    return(
+export default function CartSummary({ subTotal, totalDiscount, total }: CartSummaryProps) {
+    return (
         <Grid container direction={"column"} spacing={2} p={2} sx={{boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'}}>
             <Grid>
                 <Typography variant="h5" fontWeight={'bold'}>Sipariş Özeti</Typography>
@@ -21,27 +17,34 @@ const CartSummary = ({ cart }: CartSummaryProps) => {
             <Grid>
                 <Box display={'flex'} justifyContent={'space-between'}>
                     <Typography>Ara Toplam</Typography>
-                    <Typography>{formatPrice(totalPrice)} {currency}</Typography>
+                    <Typography>{formatPrice(subTotal)}</Typography>
                 </Box>
             </Grid>
             <Grid>
                 <Box display={'flex'} justifyContent={'space-between'}>
                     <Typography color="success">İndirimler</Typography>
-                    <Typography color="success">{formatPrice(totalDiscount)} {currency}</Typography>
+                    <Typography color="success">{formatPrice(totalDiscount)}</Typography>
                 </Box>
             </Grid>
             <Divider />
             <Grid>
                 <Box display={'flex'} justifyContent={'space-between'}>
                     <Typography variant="h6">Toplam</Typography>
-                    <Typography variant="h6" fontWeight={'bold'}>{formatPrice(total)} {currency}</Typography>    
+                    <Typography variant="h6" fontWeight={'bold'}>{formatPrice(total)}</Typography>    
                 </Box>
             </Grid>
             <Grid size={12}>
-                <CustomButton variant="contained" text="Sepeti Onayla" />
+                <Button fullWidth variant={'contained'}
+                 sx={{
+                    color: 'white',
+                    bgcolor: 'black',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                        color: 'grey'
+                    }
+                 }}
+                 >Sepeti Onayla</Button>
             </Grid>
         </Grid>
-    );
+    )
 }
-
-export default CartSummary;

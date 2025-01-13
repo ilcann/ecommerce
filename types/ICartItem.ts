@@ -1,7 +1,9 @@
 import { IProduct } from "./IProduct"
 
 export type ICartItem = {
-    cartId: number;
-    product: IProduct;
-    quantity: number;
+    id: number,
+    cartId: number,
+    productId: number,
+    product: IProduct,
+    quantity: number,
 };
